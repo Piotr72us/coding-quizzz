@@ -34,6 +34,6 @@ Enjoy !!!
 
 ### Take a quick glance at the Coding Quizzz
 ---
-
+![Gif] (assets/Coding Quiz.gif)
 
 
