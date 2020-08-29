@@ -1,4 +1,4 @@
-# Coding Quizzz!
+# Coding Quizzz! :icon:
 
 ### GitHub Page with Live Version: https://piotr72us.github.io/codingQuizzz/index.html
 ---
