@@ -32,7 +32,7 @@ Enjoy !!!
 
 
 
-### Take a quick glance at the Coding Quizzz
+### Take a peek at the Coding Quizzz:
 ---
 ![gif](https://media.giphy.com/media/VdnmSyhKa4Kjn6TCAj/giphy.gif)
 
