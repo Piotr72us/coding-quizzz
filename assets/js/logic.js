@@ -6,8 +6,6 @@ var currentQuestion;
 var userScore = 0;
 var timer;
 
-
-
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
 var timerEl = document.getElementById("time");
@@ -16,15 +14,17 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
-// my new variables to reference DOM elements
+// my additional variables to reference DOM elements
 var startScreenEl = document.getElementById("start-screen");
-var questionTextEl = document.getElementById("question-title");
+var questionTitleEl = document.getElementById("question-title");
 var endScreenEl = document.getElementById("end-screen");
 var finalScoreEl = document.getElementById("final-score");
+
 
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
 var sfxWrong = new Audio("assets/sfx/incorrect.wav");
+
 
 function startQuiz() {
   // hide start screen
@@ -36,6 +36,7 @@ function startQuiz() {
   // show starting time
   timerEl.innerHTML = `${timerId}`;
   timerId--;
+  // prevent negative time
   timerId = timerId < 0 ? 0 : timerId;
   }
   setInterval(myTimer, 1000);
@@ -43,21 +44,19 @@ function startQuiz() {
 };
 
 
-
 function getQuestion() {
   // get current question object from array
   currentQuestion = questions[currentQuestionIndex];
-
   // update title with current question
-  questionTextEl.textContent = currentQuestion.title;
-
+  questionTitleEl.textContent = currentQuestion.title;
   // clear out any old question choices
   choicesEl.innerHTML = "";
+
   // loop over choices
   for (var i = 0; i < currentQuestion.choices.length; i++) {
+
   // create new button for each choice
   var choiceBtn = document.createElement("button");
-  
   choiceBtn.textContent = currentQuestion.choices[i];
 
   // attach click event listener to each choice
@@ -71,53 +70,51 @@ function getQuestion() {
 }
 
 function questionClick(event) {
-  // event.stopPropagation();
-
   // check if user guessed correctly
   if (event.target.textContent === questions[currentQuestionIndex].answer) {
-    // console.log(event.target.textContent)
-    // console.log(currentQuestion.answer)
-
     userScore = userScore + 10;
-    console.log(userScore)
+    // play "right" sound effect
     sfxRight.play();
+    feedbackEl.textContent = "Correct!";
   }
-    else {
-      timerId = timerId - 10;
-      timerEl.textContent = timerId;
-      sfxWrong.play();
-    }
-  // penalize time
-  // display new time on page
-  // play "wrong" sound effect
   // else
-  // play "right" sound effect
+    else {
+      // penalize time
+      timerId = timerId - 10;
+      // display new time on page
+      timerEl.textContent = timerId;
+      // play "wrong" sound effect
+      sfxWrong.play();
+      feedbackEl.textContent = "Wrong!";
+    }
+  
   // flash right/wrong feedback on page for half a second
+  feedbackEl.setAttribute("class", "feedback");
+  setTimeout(function() {
+    feedbackEl.setAttribute("class", "feedback hide");
+  }, 1000);
+
   // move to next question
   currentQuestionIndex++;
   // check if we've run out of questions
   if (currentQuestionIndex > questions.length - 1) {
+    // quizEnd
     quizEnd();
+    // else
   } else {
+    // getQuestion
     getQuestion();
   }
-  // quizEnd
-  // else
-  // getQuestion
 }
 
 function quizEnd() {
   // stop timer
   timerId = 0;
-  // clearInterval(timer);
-  // finalScoreEl = 4;
   // show final score
   finalScoreEl.textContent = userScore;
-  // console.log(finalScoreEl);
   // hide questions section
   questionsEl.className = "hide";
-
-    // show end screen
+  // show end screen
   endScreenEl.className = "start";
 }
 
@@ -127,47 +124,30 @@ function clockTick() {
 }
 
 function saveHighscore() {
-
-  // submitBtn.addEventListener("click", function(event) {
-  //   event.preventDefault();
-  
+    // get value of input box
     var initials = initialsEl.value;
-    // localStorage.setItem("initials", initialsEl);
-  
+    // make sure value wasn't empty
     if (initials === "") {
-      alert("Please leave your initial");
+      alert("Please leave your initials");
     } else {
+    // get saved scores from localstorage, or if not any, set to empty array
     var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
-  
-      // localStorage.setItem("initials", initialsEl);
 
-      // new score object for user
-      var latestScore = {
-        userScore: userScore,
-        initials: initials,
-      }
-      console.log(latestScore);
-
-      //save to local storage
-      highScores.push(latestScore);
-
-      window.localStorage.setItem("highScores", JSON.stringify(highScores));
-
-      // show the highscores page
-      window.location.href = "highscores.html";
-
+    // new score object for user
+    var latestScore = {
+      userScore: userScore,
+      initials: initials,
     }
+    console.log(latestScore);
 
+    //save to local storage
+    highScores.push(latestScore);
+    window.localStorage.setItem("highScores", JSON.stringify(highScores));
 
-  }
-  
-  // get value of input box
-  // make sure value wasn't empty
-  // get saved scores from localstorage, or if not any, set to empty array
-  // format new score object for current user
-  // save to localstorage
-  // redirect to next page
-
+    // show the highscores page
+    window.location.href = "highscores.html";
+    }
+}
 
 function checkForEnter(event) {
   // check if event key is enter
