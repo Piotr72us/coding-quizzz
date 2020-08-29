@@ -34,6 +34,6 @@ Enjoy !!!
 
 ### Take a quick glance at the Coding Quizzz
 ---
-![] (https://giphy.com/gifs/VdnmSyhKa4Kjn6TCAj)
+![gif] (https://media.giphy.com/media/VdnmSyhKa4Kjn6TCAj/giphy.gif)
 
 
