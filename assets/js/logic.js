@@ -16,6 +16,7 @@ var submitBtn = document.getElementById("submit");
 var startBtn = document.getElementById("start");
 var initialsEl = document.getElementById("initials");
 var feedbackEl = document.getElementById("feedback");
+// my new variables to reference DOM elements
 var startScreenEl = document.getElementById("start-screen");
 var questionTextEl = document.getElementById("question-title");
 var endScreenEl = document.getElementById("end-screen");
@@ -74,8 +75,8 @@ function questionClick(event) {
 
   // check if user guessed correctly
   if (event.target.textContent === questions[currentQuestionIndex].answer) {
-    console.log(event.target.textContent)
-    console.log(currentQuestion.answer)
+    // console.log(event.target.textContent)
+    // console.log(currentQuestion.answer)
 
     userScore = userScore + 10;
     console.log(userScore)
@@ -109,10 +110,10 @@ function quizEnd() {
   // stop timer
   timerId = 0;
   // clearInterval(timer);
-  finalScoreEl = 4;
+  // finalScoreEl = 4;
   // show final score
   finalScoreEl.textContent = userScore;
-  console.log(finalScoreEl);
+  // console.log(finalScoreEl);
   // hide questions section
   questionsEl.className = "hide";
 
@@ -127,21 +128,38 @@ function clockTick() {
 
 function saveHighscore() {
 
-  submitBtn.addEventListener("click", function(event) {
-    event.preventDefault();
+  // submitBtn.addEventListener("click", function(event) {
+  //   event.preventDefault();
   
-    initialsEl = initialsEl.value;
+    var initials = initialsEl.value;
     // localStorage.setItem("initials", initialsEl);
   
-    if (initialsEl === "") {
-      alert("Please put your initial");
+    if (initials === "") {
+      alert("Please leave your initial");
     } else {
-    
+    var highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
   
-      localStorage.setItem("initials", initialsEl);
-      
-      
-    };})
+      // localStorage.setItem("initials", initialsEl);
+
+      // new score object for user
+      var latestScore = {
+        userScore: userScore,
+        initials: initials,
+      }
+      console.log(latestScore);
+
+      //save to local storage
+      highScores.push(latestScore);
+
+      window.localStorage.setItem("highScores", JSON.stringify(highScores));
+
+      // show the highscores page
+      window.location.href = "highscores.html";
+
+    }
+
+
+  }
   
   // get value of input box
   // make sure value wasn't empty
@@ -149,7 +167,7 @@ function saveHighscore() {
   // format new score object for current user
   // save to localstorage
   // redirect to next page
-}
+
 
 function checkForEnter(event) {
   // check if event key is enter
