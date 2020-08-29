@@ -7,6 +7,7 @@ var userScore = 0;
 var timer;
 
 
+
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
 var timerEl = document.getElementById("time");
@@ -59,7 +60,9 @@ function getQuestion() {
   choiceBtn.textContent = currentQuestion.choices[i];
 
   // attach click event listener to each choice
-  choiceBtn.addEventListener("click", function(e){questionClick(e)})
+  choiceBtn.addEventListener("click", function(e){
+    questionClick(e)
+  });
 
   // display on the page
   choicesEl.appendChild(choiceBtn);
@@ -75,10 +78,13 @@ function questionClick(event) {
     console.log(currentQuestion.answer)
 
     userScore = userScore + 10;
-    console.log(userScore)}
+    console.log(userScore)
+    sfxRight.play();
+  }
     else {
       timerId = timerId - 10;
       timerEl.textContent = timerId;
+      sfxWrong.play();
     }
   // penalize time
   // display new time on page
@@ -101,8 +107,8 @@ function questionClick(event) {
 
 function quizEnd() {
   // stop timer
-  time = 0;
-  clearInterval(timer);
+  timerId = 0;
+  // clearInterval(timer);
   finalScoreEl = 4;
   // show final score
   finalScoreEl.textContent = userScore;
@@ -120,6 +126,23 @@ function clockTick() {
 }
 
 function saveHighscore() {
+
+  submitBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+  
+    initialsEl = initialsEl.value;
+    // localStorage.setItem("initials", initialsEl);
+  
+    if (initialsEl === "") {
+      alert("Please put your initial");
+    } else {
+    
+  
+      localStorage.setItem("initials", initialsEl);
+      
+      
+    };})
+  
   // get value of input box
   // make sure value wasn't empty
   // get saved scores from localstorage, or if not any, set to empty array
