@@ -54,20 +54,32 @@ function getQuestion() {
   // loop over choices
   for (var i = 0; i < currentQuestion.choices.length; i++) {
   // create new button for each choice
-  var choice = document.createElement("button");
-  // choice.className = currentQuestion
-  choice.textContent = currentQuestion.choices[i];
+  var choiceBtn = document.createElement("button");
+  
+  choiceBtn.textContent = currentQuestion.choices[i];
 
   // attach click event listener to each choice
-  choice.onlick = questionClick;
+  choiceBtn.addEventListener("click", function(e){questionClick(e)})
 
   // display on the page
-  choicesEl.appendChild(choice);
+  choicesEl.appendChild(choiceBtn);
   }
 }
 
-function questionClick() {
-  // check if user guessed wrong
+function questionClick(event) {
+  // event.stopPropagation();
+
+  // check if user guessed correctly
+  if (event.target.textContent === questions[currentQuestionIndex].answer) {
+    console.log(event.target.textContent)
+    console.log(currentQuestion.answer)
+
+    userScore = userScore + 10;
+    console.log(userScore)}
+    else {
+      timerId = timerId - 10;
+      timerEl.textContent = timerId;
+    }
   // penalize time
   // display new time on page
   // play "wrong" sound effect
@@ -75,7 +87,13 @@ function questionClick() {
   // play "right" sound effect
   // flash right/wrong feedback on page for half a second
   // move to next question
+  currentQuestionIndex++;
   // check if we've run out of questions
+  if (currentQuestionIndex > questions.length - 1) {
+    quizEnd();
+  } else {
+    getQuestion();
+  }
   // quizEnd
   // else
   // getQuestion
