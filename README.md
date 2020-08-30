@@ -1,4 +1,4 @@
-# Coding Quizzz! :bolt:
+# Coding Quizzz! :traffic_light:
 
 ### GitHub Page with Live Version: https://piotr72us.github.io/codingQuizzz/index.html
 ---
