@@ -1,9 +1,6 @@
 # Coding Quizzz! :pencil2:
----
+
 ### GitHub Page with Live Version: https://piotr72us.github.io/codingQuizzz/index.html
----
-### Take a peek at the Coding Quizzz:
-![gif](https://media.giphy.com/media/VdnmSyhKa4Kjn6TCAj/giphy.gif)
 
 ---
 ### Programming Languages Used:
@@ -30,4 +27,7 @@ Here is the quiz you need to help you evaluate your newly acquired knowledge.
 
 Enjoy !!!
 
+---
+### Take a peek at the Coding Quizzz:
+![gif](https://media.giphy.com/media/VdnmSyhKa4Kjn6TCAj/giphy.gif)
 ---
