@@ -1,13 +1,8 @@
-// your code 
+// code 
 
 function printHighscores() {
   // either get scores from local storage or set to empty array
   highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
-
-  // (optional) sort highscores by score property in descending order
-  // highScores.sort(function(a, b) {
-  //   return b.highScore - a.highScore;
-  // });
 
   // for each score
   highScores.forEach(function(highScores) {
