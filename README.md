@@ -1,20 +1,20 @@
-# Coding Quizzz! :traffic_light:
+# Coding Quizzz! :pencil2:
 
 ### GitHub Page with Live Version: https://piotr72us.github.io/codingQuizzz/index.html
+
+
+
 ---
-
-
-
 ### Programming Languages Used:
----
+
 + JavaScript 68%
 + HTML 21%
 + CSS 11%
 
 
-
-### About this application
 ---
+### About this application
+
 
 Do you want to challenge yourself on your way to become a JavaScript programmer?
 Look no more!
@@ -30,9 +30,8 @@ Here is the quiz you need to help you evaluate your newly acquired knowledge.
 Enjoy !!!
 
 
-
-### Take a peek at the Coding Quizzz:
 ---
+### Take a peek at the Coding Quizzz:
 ![gif](https://media.giphy.com/media/VdnmSyhKa4Kjn6TCAj/giphy.gif)
 
 
