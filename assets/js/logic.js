@@ -1,10 +1,8 @@
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
-var time = questions.length * 15;
 var timerId = 75;
 var currentQuestion;
 var userScore = 0;
-var timer;
 
 // variables to reference DOM elements
 var questionsEl = document.getElementById("questions");
@@ -19,7 +17,6 @@ var startScreenEl = document.getElementById("start-screen");
 var questionTitleEl = document.getElementById("question-title");
 var endScreenEl = document.getElementById("end-screen");
 var finalScoreEl = document.getElementById("final-score");
-
 
 // sound effects
 var sfxRight = new Audio("assets/sfx/correct.wav");
@@ -38,6 +35,10 @@ function startQuiz() {
   timerId--;
   // prevent negative time
   timerId = timerId < 0 ? 0 : timerId;
+  // end quiz if time runs out
+  if (timerId === 0) {
+    quizEnd();
+  }
   }
   setInterval(myTimer, 1000);
   getQuestion();
@@ -72,7 +73,8 @@ function getQuestion() {
 function questionClick(event) {
   // check if user guessed correctly
   if (event.target.textContent === questions[currentQuestionIndex].answer) {
-    userScore = userScore + 10;
+    // userScore = userScore + 10;
+    userScore +=10;
     // play "right" sound effect
     sfxRight.play();
     feedbackEl.textContent = "Correct!";
@@ -80,7 +82,7 @@ function questionClick(event) {
   // else
     else {
       // penalize time
-      timerId = timerId - 10;
+      timerId -=10;
       // display new time on page
       timerEl.textContent = timerId;
       // play "wrong" sound effect
@@ -118,11 +120,6 @@ function quizEnd() {
   endScreenEl.className = "start";
 }
 
-function clockTick() {
-  // update time
-  // check if user ran out of time
-}
-
 function saveHighscore() {
     // get value of input box
     var initials = initialsEl.value;
@@ -151,7 +148,10 @@ function saveHighscore() {
 
 function checkForEnter(event) {
   // check if event key is enter
-  // saveHighscore
+  if (event.keyCode == 13) {
+    // saveHighscore
+    saveHighscore();
+  }
 }
 
 // user clicks button to submit initials
@@ -160,4 +160,5 @@ submitBtn.onclick = saveHighscore;
 // user clicks button to start quiz
 startBtn.onclick = startQuiz;
 
+//user can click enter to submit initials
 initialsEl.onkeyup = checkForEnter;

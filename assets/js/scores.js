@@ -1,41 +1,39 @@
-var clearEvent = document.getElementById("clear")
+// your code 
 
 function printHighscores() {
-  // either get scores from localstorage or set to empty array
+  // either get scores from local storage or set to empty array
   highScores = JSON.parse(window.localStorage.getItem("highScores")) || [];
 
   // (optional) sort highscores by score property in descending order
-  highScores.sort(function(a, b) {
-    return b.score - a.score;
-  });
+  // highScores.sort(function(a, b) {
+  //   return b.highScore - a.highScore;
+  // });
 
   // for each score
-  highScores.forEach(function(score) {
+  highScores.forEach(function(highScores) {
+    // create li tag for each high score
     var liTag = document.createElement("li");
-    liTag.textContent = score;
-
+    liTag.textContent = highScores.initials + " " + highScores.userScore;
+    // display on page
     var olEl = document.getElementById("highscores");
     olEl.append(liTag);
-  }
-
-
-  );
-    // create li tag for each high score
-
-    // display on page
+  });
 }
 
 function clearHighscores() {
-  // (and reload)
-  console.log("I was clicked");
-  var clearHighscores = document.getElemenentsByTagName("li");
-  clearHighscores.textContent = "";
-
+  // variable to get the highscores element 
+  var grabOl = document.getElementById("highscores");
+  //delete highscores from local storage
+  window.localStorage.clear();
+  // (and reload - stop displaying deleted highscores on page)
+  while (grabOl.hasChildNodes()) {
+    grabOl.removeChild(grabOl.firstChild);
+  }
 }
 
 // attach clear event to clear score button
-
-clearEvent.onclick = clearHighscores;
+document.getElementById("clear").addEventListener("click", clearHighscores)
 
 // run printhighscore when page loads
 printHighscores();
+
