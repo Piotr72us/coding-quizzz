@@ -1,6 +1,6 @@
 # Coding Quizzz! :pencil2:
 
-### GitHub Page with Live Version: https://piotr72us.github.io/codingQuizzz/index.html
+### GitHub Page with Live Version: https://piotr72us.github.io/coding-quizzz/
 
 ---
 ### Programming Languages Used:
